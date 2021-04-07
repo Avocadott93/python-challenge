@@ -8,15 +8,15 @@ Pybank_csv = os.path.join("Resources", "budget_data.csv")
 
 # Create lists to store data
 
-curNumber = []
-preNumber = []
+curNumber = 0
+preNumber = 0
 curMonth = []
 preMonth = []
-sum = []
-change = []
-avgChange = []
-maxIncr = []
-maxDec = []
+sum = 0 
+change = 0
+avgChange = 0
+maxIncr = 0
+maxDec = 0
 maxIncr_Month = []
 maxDec_Month = []
 
@@ -31,33 +31,42 @@ with open(Pybank_csv) as csvfile:
         curMonth = row[0]
         curNumber = row[1]
         sum = sum + int(row[1])
-        change = curNumber - preNumber 
+        change = int(curNumber) - int(preNumber)
     
         # Find the greatest increase in profits(date and amount)
         if change > 0:
-            if change > maxIncr: maxIncr = change
+            if change > maxIncr: 
+                maxIncr = change
+                maxIncr_Month = curMonth
         else: maxIncr = maxIncr + 0 
 
         # Find the greatest decrease in profits(date and amount)
         if change < 0:
-            if change < maxIncr: maxDec = change
+            if change < maxIncr: 
+                maxDec = change
+                maxDec_Month = curMonth
             max 
         else: maxDec = maxDec - 0 
 
         # Assign the current profit/losses to previous value
         preNumber = curNumber
 
+    #sum_row = sum(row)
+
+
 
     # Calculate the total number of months, sum of all changes, and the average change     
-    sumrow = crow_sum()
-    sumChange = sumChange + (crow[1] - preNumber)
-    avgChange = sumChange/sumrow
+    
+    #sumChange = sumChange + (crow[1] - preNumber)
+    #avgChange = sumChange/sumrow
     
 # Print my analysis
 print("Financial Analysis")
 print("-----------------------------")
 
-print("Total Months:" + str(sumrow))
-print("Total:" + str(sum))
-print("Greatest Increase in Profits:" + maxIncr_Month + str(maxIncr))
-print("Graetest Decrease in Profits:" + maxDec_Month + (str(maxDec)))
+#print(sum_row)
+
+#print("Total Months:", str(sumrow))
+print("Total:", sum)
+print("Greatest Increase in Profits:", maxIncr_Month, "", str(maxIncr))
+#print("Graetest Decrease in Profits:" + maxDec_Month + (str(maxDec)))
